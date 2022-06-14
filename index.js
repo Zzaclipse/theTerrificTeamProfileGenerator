@@ -141,6 +141,9 @@ function addIntern() {
 function makeHTML() {
   console.log(teamMembers);
   console.log(teamIDs);
+
+  if (fs.existsSync("./dist")) {
+  }
 }
 //
 //  5. function build team
