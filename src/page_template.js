@@ -1,51 +1,118 @@
-/**********************************************************
-  REMOVE ALL THE COMMENTS BEFORE SUBMITTING YOUR HOMEWORK
-***********************************************************/
+function addManagerString(obj) {
+  return `
+  <div class="card text-center" style="width: 15rem">
+          <div class="card-body">
+            <div class="card-header">
+              <h5 class="card-title">${obj.getName()}</h5>
+              <h6 class="card-subtitle"><i class="fa-solid fa-mug-hot"></i> ${obj.getRole()}</h6>
+            </div>
+            <br />
+            <ul class="list-group list-group-flush text-left">
+              <li class="list-group-item">ID: ${obj.getId()}</li>
+              <li class="list-group-item">Email: <a href="mailto:${obj.getEmail()}">${obj.getEmail()}</a></li>
+              <li class="list-group-item">Office Number: ${obj.getOfficeNumber()}</li>
+            </ul>
+          </div>
+        </div>
+  
+  `;
+}
 
-// Step 1. export function to generate entire html page with template literal
-// Step 2. function to create team template
-// Step 3. functions to generate manager, engineer, and intern templates
+function addEngineerString(obj) {
+  return `
+  <div class="card text-center" style="width: 15rem">
+          <div class="card-body">
+            <div class="card-header">
+              <h5 class="card-title">${obj.getName()}</h5>
+              <h6 class="card-subtitle"><i class="fa-solid fa-glasses"></i> ${obj.getRole()}</h6>
+            </div>
+            <br />
+            <ul class="list-group list-group-flush text-left">
+              <li class="list-group-item">ID: ${obj.getId()}</li>
+              <li class="list-group-item">Email: <a href="mailto:${obj.getEmail()}">${obj.getEmail()}</a></li>
+              <li class="list-group-item">Github: <a href="https://github.com//${obj.getGithub()}">${obj.getGithub()}</a></li>
+            </ul>
+          </div>
+        </div>
+  
+  `;
+}
 
-// Step 3a. function to generate manager card template
-//  - take in manager as input parameter, a manager object
-//  - create manager card template
-//  -   call get name, get role, get id, get email, and get office number methods to fill in the template
-//  - return the template to the caller
+function addInternString(obj) {
+  return `
+  <div class="card text-center" style="width: 15rem">
+          <div class="card-body">
+            <div class="card-header">
+              <h5 class="card-title">${obj.getName()}</h5>
+              <h6 class="card-subtitle"><i class="fa-solid fa-graduation-cap"></i> ${obj.getRole()}</h6>
+            </div>
+            <br />
+            <ul class="list-group list-group-flush text-left">
+              <li class="list-group-item">ID: ${obj.getId()}</li>
+              <li class="list-group-item">Email: <a href="mailto:${obj.getEmail()}">${obj.getEmail()}</a></li>
+              <li class="list-group-item">School: ${obj.getSchool()}</li>
+            </ul>
+          </div>
+        </div>
+  
+  `;
+}
 
-// Step 3b. function to generate engineer card template
-//  - take in engineer as input parameter, an engineer object
-//  - create engineer card template
-//  -   call get name, get role, get id, get email, and get github methods to fill in the template
-//  - return the template to the caller
+function addTeam(arr) {
+  let teamString = ``;
+  arr.forEach((teamMemberObj) => {
+    if (teamMemberObj.getRole() === "Manager") {
+      teamString += addManagerString(teamMemberObj);
+    }
+    if (teamMemberObj.getRole() === "Engineer") {
+      teamString += addEngineerString(teamMemberObj);
+    }
+    if (teamMemberObj.getRole() === "Intern") {
+      teamString += addInternString(teamMemberObj);
+    }
+  });
+  return teamString;
+}
 
-// Step 3c. function to generate intern card template
-//  - take in intern as input parameter, an intern object
-//  - create intern card template
-//  -   call get name, get role, get id, get email, and get school methods to fill in the template
-//  - return the template to the caller
+function pageTemplate(arr) {
+  return `
+ 
+ <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
 
-// Step 2. function to create the team template
-// take in team as input parameter from the caller
-//  - create an empty array to hold the template literal strings for the entire team members
-//  - 1. use array.filter() on team to get the new array with only 'Manager' members via getRole method
-//  -   use array.map() on the 'Manager' arrray and in the callback function to call a function to generate manager card template passing each manager as input argument
-//  -   convert the resultant manager template array from .map() into string using .join()
-//  -   the converted template leterail string is pushed to the empty team template array
-//  - 2. use array.filter() on team to get the new array with only engineer members via getRole method
-//  -   use array.map() on the engineer arrray and in the callback function to call a function to generate engineer card template passing each engineer as input argument
-//  -   convert the resultant engineer template array from .map() into string using .join()
-//  -   the converted template leterail string is pushed to the empty team template array
-//  - 3. use array.filter() on team to get the new array with only intern members via getRole method
-//  -   use array.map() on the intern arrray and in the callback function to call a function to generate intern card template passing each intern as input argument
-//  -   convert the resultant intern template array from .map() into string using .join()
-//  -   the converted template leterail string is pushed to the empty team template array
-//  - 4. convert the empty team template array (now is not empty) into template string, then return it to the caller
+    <title>My Team</title>
 
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+  </head>
 
+  <body>
+    <div id="title" class="text-center">My Team</div>
 
-// Step 1. export function to generate entire html page with template literal
-//  - this function takes in team as input parameter from the caller, which is array of answer objects from user input
-//  - in this function, within the template literal, you will call another function to create the team template
-//  -   passing team , array of answer objects, as input argument
-//  - you will return the template to the caller
-//  - export the function
+    <div class="row">
+      <div class="col-2"></div>
+      <div id="addCardsHere" class="col-8 text-center">
+      ${addTeam(arr)}
+      </div>
+      <div class="col-2"></div>
+    </div>
+  </body>
+</html>
+
+`;
+}
+
+module.exports = pageTemplate;

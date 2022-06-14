@@ -9,3 +9,8 @@
     margin:2vw;
     display: inline-block;
 }
+
+.card-header{
+    background-color: blue;
+    color:white
+}

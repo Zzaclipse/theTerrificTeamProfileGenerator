@@ -5,16 +5,10 @@ const Engineer = require("./lib/Engineer");
 const inquirer = require("inquirer");
 const fs = require("fs");
 const path = require("path");
-const page_template = require("./src/page_template");
-const { mainModule } = require("process");
-
-const outputFolder = "dist";
-const htmlFileName = "team.html";
+const pageTemplate = require("./src/page_template");
 
 let teamMembers = [];
 let teamIDs = [];
-
-//  1a. call create manager function
 
 function createManager() {
   inquirer
@@ -139,23 +133,13 @@ function addIntern() {
 }
 
 function makeHTML() {
-  console.log(teamMembers);
-  console.log(teamIDs);
-
-  if (fs.existsSync("./dist")) {
+  if (!fs.existsSync("./dist")) {
+    fs.mkdirSync("./dist");
   }
-}
-//
-//  5. function build team
-//      - check if the output folder path already exists.
-//      -   if not, create it
-//      - call page template function passing the team member object array as input argument
-//      - write the returned template function to the output
-//
-//      - Hint: fs.existsSync, fs.mkdirSync, and fs.writeFileSync
-
-function main() {
-  createManager();
+  fs.writeFile("./dist/team.html", pageTemplate(teamMembers), (err) => {
+    if (err) throw err;
+    console.log("team.html created");
+  });
 }
 
-main();
+createManager();
