@@ -1,6 +1,6 @@
 function addManagerString(obj) {
   return `
-  <div class="card text-center" style="width: 15rem">
+  <div class="card text-center" style="width: 18rem">
           <div class="card-body">
             <div class="card-header">
               <h5 class="card-title">${obj.getName()}</h5>
@@ -20,7 +20,7 @@ function addManagerString(obj) {
 
 function addEngineerString(obj) {
   return `
-  <div class="card text-center" style="width: 15rem">
+  <div class="card text-center" style="width: 18rem">
           <div class="card-body">
             <div class="card-header">
               <h5 class="card-title">${obj.getName()}</h5>
@@ -40,7 +40,7 @@ function addEngineerString(obj) {
 
 function addInternString(obj) {
   return `
-  <div class="card text-center" style="width: 15rem">
+  <div class="card text-center" style="width: 18rem">
           <div class="card-body">
             <div class="card-header">
               <h5 class="card-title">${obj.getName()}</h5>
